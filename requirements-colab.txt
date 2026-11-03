@@ -1,0 +1,8 @@
+# Keep the Colab-provided compatible torch/torchvision pair.
+segmentation-models-pytorch==0.5.0
+rasterio>=1.4,<2
+scikit-image>=0.24,<1
+pandas>=2,<3
+matplotlib>=3.8,<4
+requests>=2.31,<3
+pyproj>=3.6,<4

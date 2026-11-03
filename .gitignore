@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.env
+.env.*
+data/
+reports/
+checkpoints/
+*.pt
+*.pth
+*.tif
+*.zip
+PROGRESS.md
+upload_bundle.json
