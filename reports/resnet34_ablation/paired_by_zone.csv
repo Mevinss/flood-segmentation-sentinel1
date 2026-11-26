@@ -1,0 +1,5 @@
+zone,water,missed_pretrained,missed_scratch,missed_both
+all,451901,67283,141047,61145
+edge_2px,99957,33025,56661,30750
+interior,327172,31244,77574,27593
+unknown_nearby,24772,3014,6812,2802

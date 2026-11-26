@@ -4,12 +4,17 @@ __pycache__/
 .ipynb_checkpoints/
 .env
 .env.*
-data/
-reports/
+# Sen1Floods11 суреттері қайта таратылмайды: код оларды ресми көзден жүктейді
+/data/
+*.tif
+*.zip
+*.pdf
+*.docx
 checkpoints/
 *.pt
 *.pth
-*.tif
-*.zip
+*.joblib.tmp
+FloodSegmentation_Defense/outputs/attention_unet_resnet34_export.joblib
+FloodSegmentation_Defense/outputs/manifest.csv
 PROGRESS.md
 upload_bundle.json

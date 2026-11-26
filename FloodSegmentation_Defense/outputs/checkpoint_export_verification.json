@@ -1,0 +1,9 @@
+{
+  "source_checkpoint_sha256": "4d1cffec480036877ed40c1f2ad250b344b027a42c70f42fc2ee8b654a7ac261",
+  "identical_state_dict": true,
+  "identical_predictions": true,
+  "max_probability_difference": 0.0,
+  "epoch": 34,
+  "threshold": 0.473,
+  "model_bytes": 91455512
+}

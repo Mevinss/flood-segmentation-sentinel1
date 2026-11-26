@@ -20,8 +20,31 @@ class PlainUNet(nn.Module):
             x=layer(torch.cat([F.interpolate(x,size=skip.shape[-2:],mode='bilinear',align_corners=False),skip],1))
         return self.head(x)
 
+class GatedSkip(nn.Module):
+    """Modulate a skip using a decoder-conditioned spatial attention map."""
+    def __init__(self, decoder_channels, skip_channels):
+        super().__init__()
+        self.decoder_channels = decoder_channels
+        hidden = max(skip_channels // 2, 1)
+        self.decoder_projection = nn.Conv2d(decoder_channels, hidden, 1)
+        self.skip_projection = nn.Conv2d(skip_channels, hidden, 1)
+        self.score = nn.Conv2d(hidden, 1, 1)
+
+    def forward(self, fused):
+        decoder = fused[:, :self.decoder_channels]
+        skip = fused[:, self.decoder_channels:]
+        score = self.score(F.relu(self.decoder_projection(decoder) + self.skip_projection(skip)))
+        return torch.cat((decoder, skip * score.sigmoid()), dim=1)
+
+
 def build_model(name='resnet34',pretrained=True):
     if name=='plain': return PlainUNet()
-    if name!='resnet34': raise ValueError(name)
+    if name not in ('resnet34', 'attention_resnet34'): raise ValueError(name)
     import segmentation_models_pytorch as smp
-    return smp.Unet(encoder_name='resnet34',encoder_weights='imagenet' if pretrained else None,in_channels=2,classes=1,activation=None)
+    model = smp.Unet(encoder_name='resnet34',encoder_weights='imagenet' if pretrained else None,in_channels=2,classes=1,activation=None)
+    if name == 'attention_resnet34':
+        skip_widths = reversed(model.encoder.out_channels[1:-1])
+        for stage, skip_width in zip(model.decoder.blocks, skip_widths):
+            decoder_width = stage.conv1[0].in_channels - skip_width
+            stage.attention1 = GatedSkip(decoder_width, skip_width)
+    return model

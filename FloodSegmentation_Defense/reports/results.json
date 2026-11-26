@@ -1,0 +1,34 @@
+{
+  "bolivia": {
+    "attention": {
+      "iou": 0.6954830585378439,
+      "f1": 0.8203951729693091,
+      "precision": 0.7901371210723729,
+      "recall": 0.8530629496283478,
+      "tp": 385500,
+      "fp": 102390,
+      "fn": 66401,
+      "tn": 2270143
+    },
+    "baseline": {
+      "iou": 0.6851734408847338,
+      "f1": 0.8131785420556006,
+      "precision": 0.7784828189231694,
+      "recall": 0.8511111947085755,
+      "tp": 384618,
+      "fp": 109443,
+      "fn": 67283,
+      "tn": 2263090
+    }
+  },
+  "tolerance_pp": 2,
+  "threshold_base": 0.5,
+  "validation_target": 0.8038957406891161,
+  "threshold_attention": 0.473,
+  "validation_attention": 0.8039006707583253,
+  "matched_tp": 384618,
+  "diagnostic_fp_attention": 100721.0,
+  "epochs": 49,
+  "best_epoch": 34,
+  "best_valid_iou": 0.6794487475342914
+}
